@@ -1,6 +1,6 @@
 # LeetCode 76: 最小覆盖子串 (Minimum Window Substring)
 # 核心过程：右指针扩张窗口，直到包含 t 的全部字符；然后左指针收缩窗口，直到再缩一步就不满足要求。
-
+# 右边扩张直到覆盖目标，左边收缩直到即将失效；合法窗口中不断更新最短答案。
 class Solution(object):
     def minWindow(self, s, t):
         """

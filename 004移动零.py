@@ -1,20 +1,25 @@
-"""
-双指针交换
+# 核心思路（双指针）：
+# - right 指针从左到右遍历每个元素，负责"发现"非零元素。
+# - left 指针指向"下一个非零元素应该放的位置"。
+#
+# 当 right 发现非零元素时，与 left 处元素交换，left 右移一位。
+# 所有非零元素按原顺序移到前面，零自然被挤到末尾。
+#
+# 时间复杂度：O(n)
+# 空间复杂度：O(1)
 
-- `right` 从左到右检查每个元素。
-- `left` 表示下一个非零元素应该放在哪里。
-
-当 `nums[right]` 是非零元素时：
-1. 把它和 `nums[left]` 交换。
-2. 让 `left` 向右移动一位。
-"""
 class Solution(object):
-    def moveZero(self,nums):
-        left = 0
-        
+    def moveZero(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None   # 原地修改，不返回
+        """
+        left = 0  # 下一个非零元素应该放置的位置
+
         for right in range(len(nums)):
             if nums[right] != 0:
-                if nums[right] != nums[left]:   # 判断两个位置是否相同。可以避免没有意义的交换操作。
-                    nums[left],nums[right] = nums[right],nums[left]
-                
-                left += 1
+                # 两个位置不同时才交换，避免无意义的自我交换
+                if nums[right] != nums[left]:
+                    nums[left], nums[right] = nums[right], nums[left]
+
+                left += 1  # left 前移，为下一个非零元素预留位置
