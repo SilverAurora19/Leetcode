@@ -75,14 +75,12 @@ class Solution(object):
                     row = dr + r
                     col = dc + c  
 
-                    # 越界 / 不是新鲜橘子 → 跳过
-                    if row < 0 or row >= rows or col < 0 or col >= columns or grid[row][col] != 1:
-                        continue
-
-                    # 感染：新鲜橘子变腐烂
-                    grid[row][col] = 2
-                    q.append([row, col])   # 新腐烂的橘子入队，下一分钟它会继续传播
-                    fresh -= 1             # 新鲜橘子计数 -1
+                    # 如果不越界越界并且是新鲜橘子 → 感染
+                    if row >= 0 or row < rows or col >= 0 or col < columns or grid[row][col] == 1:
+                        # 感染：新鲜橘子变腐烂
+                        grid[row][col] = 2
+                        q.append([row, col])   # 新腐烂的橘子入队，下一分钟它会继续传播
+                        fresh -= 1             # 新鲜橘子计数 -1
 
             time += 1   # 当前这一分钟处理完毕
 
