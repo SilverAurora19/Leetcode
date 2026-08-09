@@ -76,7 +76,7 @@ class Solution(object):
                     col = dc + c  
 
                     # 如果不越界越界并且是新鲜橘子 → 感染
-                    if row >= 0 or row < rows or col >= 0 or col < columns or grid[row][col] == 1:
+                    if row >= 0 and row < rows and col >= 0 and col < columns and grid[row][col] == 1:
                         # 感染：新鲜橘子变腐烂
                         grid[row][col] = 2
                         q.append([row, col])   # 新腐烂的橘子入队，下一分钟它会继续传播
