@@ -44,14 +44,14 @@ class Solution(object):
         :rtype: List[List[int]]   # 所有全排列
         """
         result = []               # 存储所有排列结果
-        current = []              # 当前正在构建的排列（路径）
+        path = []              # 当前正在构建的排列（路径）
         used = [False] * len(nums)  # used[i]：nums[i] 是否已被选入当前排列
 
         def backtrack():
             """回溯：在 current 的当前位置尝试所有未使用的数字"""
             # 终止条件：排列长度 == 原数组长度 → 所有数字已排完
-            if len(current) == len(nums):
-                result.append(list(current))  # 注意：复制一份，current 之后还会被修改
+            if len(path) == len(nums):
+                result.append(path[:])  # 注意：复制一份，path 之后还会被修改
                 return
 
             # 遍历选择列表——所有"还没用过"的数字
@@ -60,14 +60,14 @@ class Solution(object):
                     continue   # 已用过，跳过
 
                 # === 做选择 ===
-                current.append(nums[i])   # 加入当前排列
+                path.append(nums[i])   # 加入当前排列
                 used[i] = True            # 标记为已使用
 
                 # 递归填下一个位置
                 backtrack()
 
                 # === 撤销选择（回溯！）===
-                current.pop()             # 从当前排列移除
+                path.pop()             # 从当前排列移除
                 used[i] = False           # 恢复为未使用，供兄弟节点使用
 
         backtrack()
